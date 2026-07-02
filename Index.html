@@ -156,7 +156,7 @@ function renderGrid(){let l=ST.list.slice();
  if(ST.sort==='plow')l.sort((a,b)=>a[4]-b[4]);else if(ST.sort==='phigh')l.sort((a,b)=>b[4]-a[4]);else if(ST.sort==='name')l.sort((a,b)=>a[1].localeCompare(b[1]));else l.sort((a,b)=>b[5]-a[5]);
  const per=24,pages=Math.ceil(l.length/per)||1;if(ST.page>pages)ST.page=1;const pg=l.slice((ST.page-1)*per,ST.page*per);
  const subs=ST.subsData||[];
- const chips=subs.length?`<div class="chips"><span class="chip ${!ST.sub?'on':''}" onclick="ST.sub='';ST.page=1;renderGrid()">All (${ST.list.length})</span>`+subs.filter(s=>s.name!=='All').map(s=>`<span class="chip ${ST.sub===s.name?'on':''}" onclick="ST.sub='${s.name.replace(/'/g,"")}';ST.page=1;renderGrid()">${s.name} (${s.count})</span>`).join('')+`</div>`:'';
+ const chips='';
  let pager='';if(pages>1){pager='<div class="pager">';const cur=ST.page;for(let i=1;i<=pages;i++){if(i<=2||i>pages-2||Math.abs(i-cur)<=1){pager+=`<button class="${i===cur?'on':''}" onclick="ST.page=${i};renderGrid();window.scrollTo(0,0)">${i}</button>`;}else if(Math.abs(i-cur)===2){pager+='<span style="padding:8px">…</span>';}}pager+='</div>';}
  document.getElementById('grid').innerHTML=chips+
   `<div class="toolbar"><div style="font-weight:700;color:var(--muted)">${l.length.toLocaleString()} products</div>
